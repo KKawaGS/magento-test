@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Catalog:etc/product_types.xsd">
+    <type name="virtual_grouped" label="Virtual Grouped" modelInstance="GateSoftware\GateType\Model\Product\Type\VirtualGrouped" indexPriority="100" sortOrder="100" isQty="true">
+        <priceModel instance="GateSoftware\GateType\Model\Product\Price"/>
+    </type>
+</config>
