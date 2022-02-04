@@ -1,0 +1,29 @@
+
+<div id="new-message" class="cart-totals" data-bind="scope: 'gate-component'">
+    <!-- ko if: getCartItemsAmount() -->
+    <p>
+        <!-- ko if: isAmountReached() -->
+            <span>Super, kup jeszcze <strong data-bind="text: getDiffBetweenAmount()"></strong> produktów, a będziesz miał <strong data-bind="text: amount"></strong> w koszyku!</span>
+        <!-- /ko -->
+
+        <!-- ko ifnot: isAmountReached() -->
+            <span>Super, masz <strong data-bind="text: amount"></strong> produktów w koszyku!</span>
+        <!-- /ko -->
+    </p>
+    <!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*" : {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "gate-component": {
+                        "component": "GateSoftware_GateCheckout/js/view/gate-message",
+                        "amount": 10
+                    }
+                }
+            }
+        }
+    }
+</script>
