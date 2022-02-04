@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+            <referenceBlock name="checkout.cart">
+                <referenceContainer name="checkout.cart.items">
+                    <referenceContainer name="checkout.cart.container">
+                        <referenceContainer name="cart.summary">
+                            <block  class="Magento\Framework\View\Element\Template" name="checkout.cart.summary.message" template="GateSoftware_GateCheckout::gate-message.phtml" before="checkout.cart.totals.container">
+
+                            </block>
+                        </referenceContainer>
+                    </referenceContainer>
+
+                </referenceContainer>
+            </referenceBlock>
+    </body>
+</page>
