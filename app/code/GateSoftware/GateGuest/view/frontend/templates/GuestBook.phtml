@@ -2,5 +2,79 @@
     /** @var /GateSoftware/GateGuest/Block/GuestBook $block  */
 ?>
 
+<div class="row">
+    <div class="col-md-8">
+        <form
+            name="guestbook"
+            method="post"
+            id="guestbook"
+            class="form"
+            action="<?= $this->getFormPostAction(); ?>"
+            data-hasrequired="<?= $this->escapeHtmlAttr(__('* Required Fields')) ?>"
+            data-mage-init='{"validation": {}}'>
+            <fieldset class="fieldset">
+                <legend class="legend"><span class="font-weight-bold"><?= $this->escapeHtmlAttr(__('Guest Book')) ?></span></legend>
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="title">
+                                <span><?= $this->escapeHtmlAttr(__('First name')); ?></span>
+                            </label>
+                            <div class="control">
+                                <input
+                                    name="first_name"
+                                    id="first_name"
+                                    title="First name"
+                                    value=""
+                                    class="input-text"
+                                    type="text"
+                                    data-validate="{required: true, 'validate-alpha': true}"
+                                >
+                            </div>
+                        </div>
 
-<h2>Testing</h2>
+                        <div class="field name required">
+                            <label class="label" for="title">
+                                <span><?= $this->escapeHtmlAttr(__('Last name')); ?></span>
+                            </label>
+                            <div class="control">
+                                <input
+                                    name="last_name"
+                                    id="last_name"
+                                    title="Last name"
+                                    value=""
+                                    class="input-text"
+                                    type="text"
+                                    data-validate="{required: true, 'validate-alpha': true}"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="field name required">
+                            <label class="label" for="title">
+                                <span><?= $this->escapeHtmlAttr(__('Email')); ?></span>
+                            </label>
+                            <div class="control">
+                                <input
+                                    name="email"
+                                    id="email"
+                                    title="Email"
+                                    value=""
+                                    class="input-text"
+                                    type="text"
+                                    data-validate="{required: true, 'validate-email': true}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="Save"><span><?= $this->escapeHtmlAttr(__('Save')) ?></span></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
