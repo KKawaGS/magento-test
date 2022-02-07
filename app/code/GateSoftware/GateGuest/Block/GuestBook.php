@@ -10,4 +10,14 @@ class GuestBook extends Template
     {
         parent::__construct($context, $data);
     }
+
+    public function getFormPostAction() : string
+    {
+        return '/guestbook/index/post';
+    }
+
+    public function getGuestFormLink() : string
+    {
+        return '/guestbook';
+    }
 }
