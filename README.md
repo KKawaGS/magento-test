@@ -1,7 +1,7 @@
 # Magento 2 Modules
 
 ## GateCheckout
-Displays short information above the **subtotal** fields in minicart card and also on the checkout car page.
+Displays short information above the **subtotal** fields in minicart card and also on the checkout cart page.
 
 ![Screenshot](scr/GateCheckout_1.png)
 
