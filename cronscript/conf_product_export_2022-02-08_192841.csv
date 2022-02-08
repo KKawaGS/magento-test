@@ -1,0 +1,148 @@
+product_id,SKU,type_id,name,price
+62,MH01,configurable,Chaz Kangeroo Hoodie,52.000000
+78,MH02,configurable,Teton Pullover Hoodie,70.000000
+94,MH03,configurable,Bruno Compete Hoodie,63.000000
+110,MH04,configurable,Frankie  Sweatshirt,60.000000
+126,MH05,configurable,Hollister Backyard Sweatshirt,52.000000
+142,MH06,configurable,Stark Fundamental Hoodie,42.000000
+158,MH07,configurable,Hero Hoodie,54.000000
+174,MH08,configurable,Oslo Trek Hoodie,42.000000
+190,MH09,configurable,Abominable Hoodie,69.000000
+206,MH10,configurable,Mach Street Sweatshirt ,62.000000
+222,MH11,configurable,Grayson Crewneck Sweatshirt ,64.000000
+238,MH12,configurable,Ajax Full-Zip Sweatshirt ,69.000000
+254,MH13,configurable,Marco Lightweight Active Hoodie,74.000000
+270,MJ01,configurable,Beaumont Summit Kit,42.000000
+286,MJ02,configurable,Hyperion Elements Jacket,51.000000
+302,MJ04,configurable,Kenobi Trail Jacket,47.000000
+318,MJ07,configurable,Orion Two-Tone Fitted Jacket,72.000000
+334,MJ08,configurable,Lando Gym Jacket,99.000000
+350,MJ09,configurable,Taurus Elements Shell,65.000000
+366,MJ10,configurable,Mars HeatTech&trade; Pullover,66.000000
+382,MJ11,configurable,Typhon Performance Fleece-lined Jacket,60.000000
+398,MJ06,configurable,Jupiter All-Weather Trainer ,56.990000
+414,MJ03,configurable,Montana Wind Jacket,49.000000
+430,MJ12,configurable,Proteus Fitness Jackshirt,45.000000
+446,MS04,configurable,Gobi HeatTec&reg; Tee,29.000000
+462,MS05,configurable,Helios EverCool&trade; Tee,24.000000
+478,MS09,configurable,Ryker LumaTech&trade; Tee (Crew-neck),32.000000
+494,MS11,configurable,Atomic Endurance Running Tee (V-neck),28.000000
+510,MS12,configurable,Atomic Endurance Running Tee (Crew-Neck),29.000000
+526,MS03,configurable,Balboa Persistence Tee,29.000000
+542,MS06,configurable,Zoltan Gym Tee,29.000000
+558,MS01,configurable,Aero Daily Fitness Tee,24.000000
+574,MS02,configurable,Ryker LumaTech&trade; Tee (V-neck),28.000000
+590,MS10,configurable,Logan  HeatTec&reg; Tee,24.000000
+606,MS07,configurable,Deion Long-Sleeve EverCool&trade; Tee,39.000000
+622,MS08,configurable,Strike Endurance Tee,39.000000
+638,MT01,configurable,Erikssen CoolTech&trade; Fitness Tank,29.000000
+654,MT02,configurable,Tristan Endurance Tank,29.000000
+670,MT03,configurable,Primo Endurance Tank,29.000000
+676,MT04,configurable,Helios Endurance Tank,32.000000
+682,MT05,configurable,Rocco Gym Tank,24.000000
+688,MT06,configurable,Vulcan Weightlifting Tank,28.000000
+694,MT07,configurable,Argus All-Weather Tank,22.000000
+700,MT08,configurable,Sparta Gym Tank,29.000000
+706,MT09,configurable,Sinbad Fitness Tank,29.000000
+712,MT10,configurable,Tiberius Gym Tank,18.000000
+718,MT11,configurable,Atlas Fitness Tank,18.000000
+724,MT12,configurable,Cassius Sparring Tank,18.000000
+737,MP01,configurable,Caesar Warm-Up Pant,35.000000
+750,MP02,configurable,Viktor LumaTech&trade; Pant,46.000000
+763,MP03,configurable,Geo Insulated Jogging Pant,51.000000
+776,MP04,configurable,Supernova Sport Pant,45.000000
+789,MP05,configurable,Kratos Gym Pant,57.000000
+802,MP06,configurable,Mithra Warmup Pant,28.000000
+815,MP07,configurable,Thorpe Track Pant,68.000000
+828,MP08,configurable,Zeppelin Yoga Pant,82.000000
+841,MP09,configurable,Livingston All-Purpose Tight,75.000000
+854,MP10,configurable,Orestes Yoga Pant ,66.000000
+867,MP11,configurable,Aether Gym Pant ,74.000000
+880,MP12,configurable,Cronus Yoga Pant ,48.000000
+893,MSH01,configurable,Cobalt CoolTech&trade; Fitness Short,44.000000
+898,MSH02,configurable,Apollo Running Short,32.500000
+911,MSH03,configurable,Meteor Workout Short,32.500000
+924,MSH04,configurable,Torque Power Short,32.500000
+937,MSH05,configurable,Hawkeye Yoga Short,29.000000
+950,MSH06,configurable,Lono Yoga Short,32.000000
+963,MSH07,configurable,Rapha  Sports Short,35.000000
+976,MSH08,configurable,Orestes Fitness Short,35.000000
+989,MSH09,configurable,Troy Yoga Short,24.000000
+1002,MSH10,configurable,Sol Active Short,32.000000
+1015,MSH11,configurable,Arcadio Gym Short,20.000000
+1028,MSH12,configurable,Pierce Gym Short,27.000000
+1044,WH01,configurable,Mona Pullover Hoodlie,57.000000
+1060,WH02,configurable,Hera Pullover Hoodie,48.000000
+1076,WH03,configurable,Autumn Pullie,57.000000
+1092,WH04,configurable,Miko Pullover Hoodie,69.000000
+1108,WH05,configurable,Selene Yoga Hoodie,42.000000
+1114,WH06,configurable,Daphne Full-Zip Hoodie,59.000000
+1130,WH07,configurable,Phoebe Zipper Sweatshirt,59.000000
+1146,WH08,configurable,Cassia Funnel Sweatshirt,48.000000
+1162,WH09,configurable,Ariel Roll Sleeve Sweatshirt,39.000000
+1178,WH10,configurable,Helena Hooded Fleece,55.000000
+1194,WH11,configurable,Eos V-Neck Hoodie,54.000000
+1210,WH12,configurable,Circe Hooded Ice Fleece,68.000000
+1220,WJ01,configurable,Stellar Solar Jacket,75.000000
+1236,WJ02,configurable,Josie Yoga Jacket,56.250000
+1252,WJ03,configurable,Augusta Pullover Jacket,57.000000
+1268,WJ04,configurable,Ingrid Running Jacket,84.000000
+1284,WJ05,configurable,Riona Full Zip Jacket,60.000000
+1300,WJ07,configurable,Inez Full Zip Jacket,59.000000
+1316,WJ08,configurable,Adrienne Trek Jacket,57.000000
+1332,WJ09,configurable,Jade Yoga Jacket,32.000000
+1348,WJ10,configurable,Nadia Elements Shell,69.000000
+1364,WJ11,configurable,Neve Studio Dance Jacket,69.000000
+1380,WJ06,configurable,Juno Jacket,77.000000
+1396,WJ12,configurable,Olivia 1/4 Zip Light Jacket,77.000000
+1412,WS02,configurable,Gabrielle Micro Sleeve Top,28.000000
+1428,WS03,configurable,Iris Workout Top,29.000000
+1444,WS04,configurable,Layla Tee,29.000000
+1460,WS06,configurable,Elisa EverCool&trade; Tee,29.000000
+1476,WS07,configurable,Juliana Short-Sleeve Tee,42.000000
+1492,WS08,configurable,Minerva LumaTech&trade; V-Tee,32.000000
+1508,WS09,configurable,Tiffany Fitness Tee,28.000000
+1524,WS10,configurable,Karissa V-Neck Tee,32.000000
+1540,WS11,configurable,Diva Gym Tee,32.000000
+1556,WS12,configurable,Radiant Tee,22.000000
+1572,WS01,configurable,Gwyn Endurance Tee,24.000000
+1588,WS05,configurable,Desiree Fitness Tee,24.000000
+1604,WB01,configurable,Electra Bra Top,39.000000
+1620,WB02,configurable,Erica Evercool Sports Bra,39.000000
+1636,WB03,configurable,Celeste Sports Bra,39.000000
+1652,WB04,configurable,Prima Compete Bra Top,24.000000
+1668,WB05,configurable,Lucia Cross-Fit Bra ,39.000000
+1684,WT01,configurable,Bella Tank,29.000000
+1700,WT02,configurable,Zoe Tank,29.000000
+1716,WT03,configurable,Nora Practice Tank,39.000000
+1732,WT04,configurable,Nona Fitness Tank,39.000000
+1748,WT05,configurable,Leah Yoga Top,39.000000
+1764,WT06,configurable,Chloe Compete Tank,39.000000
+1780,WT07,configurable,Maya Tunic,29.000000
+1796,WT08,configurable,Antonia Racer Tank,34.000000
+1812,WT09,configurable,Breathe-Easy Tank,34.000000
+1819,WP01,configurable,Karmen Yoga Pant,39.000000
+1826,WP02,configurable,Emma Leggings,42.000000
+1833,WP03,configurable,Ida Workout Parachute Pant,48.000000
+1840,WP04,configurable,Cora Parachute Pant,75.000000
+1847,WP05,configurable,Sahara Leggings,75.000000
+1854,WP06,configurable,Diana Tights,59.000000
+1861,WP07,configurable,Aeon Capri,48.000000
+1868,WP08,configurable,Bardot Capri,48.000000
+1875,WP09,configurable,Carina Basic Capri,51.000000
+1882,WP10,configurable,Daria Bikram Pant,51.000000
+1889,WP11,configurable,Sylvia Capri,42.000000
+1896,WP12,configurable,Deirdre Relaxed-Fit Capri,63.000000
+1903,WP13,configurable,Portia Capri,49.000000
+1919,WSH01,configurable,Fiona Fitness Short,29.000000
+1935,WSH02,configurable,Maxima Drawstring Short,28.000000
+1951,WSH03,configurable,Gwen Drawstring Bike Short,50.000000
+1967,WSH04,configurable,Artemis Running Short,45.000000
+1983,WSH05,configurable,Bess Yoga Short,28.000000
+1990,WSH06,configurable,Angel Light Running Short,42.000000
+1997,WSH07,configurable,Echo Fit Compression Short,24.000000
+2003,WSH08,configurable,Sybil Running Short,44.000000
+2010,WSH09,configurable,Mimi All-Purpose Short,44.000000
+2017,WSH10,configurable,Ana Running Short,40.000000
+2024,WSH11,configurable,Ina Compression Short,49.000000
+2040,WSH12,configurable,Erika Running Short,45.000000
