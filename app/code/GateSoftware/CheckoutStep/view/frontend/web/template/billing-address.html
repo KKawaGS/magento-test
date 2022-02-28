@@ -1,5 +1,5 @@
 <div class="checkout-billing-address">
-    <div class="billing-address-same-as-shipping-block field choice" data-bind="visible: isBillingAddressDisabled()" if="!isBillingAddressDisabled()">
+    <div class="billing-address-same-as-shipping-block field choice" data-bind="visible: canUseShippingAddress()" if="!isBillingAddressDisabled()">
         <input type="checkbox" name="billing-address-same-as-shipping"
                data-bind="checked: isAddressSameAsShipping, click: useShippingAddress"/>
         <label data-bind="attr: {for: 'billing-address-same-as-shipping-' + getCode($parent)}"><span
