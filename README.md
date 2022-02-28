@@ -21,3 +21,10 @@ Creates new product type called Virtual Grouped.
 Located with sample output file in cronscript directory. Script needs credentials for magento database, configuration requires mysql server address, user name, password and database name. Depending on your server configuration you might need to output csv file to a specific location or change secure-file-priv option in your mysql server configuration for script to work properly
 
 Add this script to your crontab file (crontab -e) : 0 3 * * *  path_to_the _script. This will run this cron job every day at 3 am.
+
+## CheckoutStep
+Creates option in Stores->Configuration->Sales->Checkout Allowing to enable or disable billing address form in checkout.
+If billing address form is disabled billing address is always the same as shipping address.
+
+![Screenshot](scr/GateCheckout_5.png)
+![Screenshot](scr/GateCheckout_6.png)
