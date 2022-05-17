@@ -1,0 +1,9 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<!--    <event name="payu_redirect_url">-->
+<!--        <observer name="payu_redirect_url_observer" instance="GateSoftware\GatePay\Observer\PayURedirect"/>-->
+<!--    </event>-->
+
+<!--    <event name="checkout_onepage_controller_success_action">-->
+<!--        <observer name="payu_redirect_url_observer" instance="GateSoftware\GatePay\Observer\PayURedirect"/>-->
+<!--    </event>-->
+</config>
