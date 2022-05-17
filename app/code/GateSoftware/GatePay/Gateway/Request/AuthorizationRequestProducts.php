@@ -2,7 +2,7 @@
 
 namespace GateSoftware\GatePay\Gateway\Request;
 
-class AuthorizationRequestProducts extends AbstractAuthorizationRequest
+class AuthorizationRequestProducts extends AbstractRequest
 {
 
     public function build(array $buildSubject): array

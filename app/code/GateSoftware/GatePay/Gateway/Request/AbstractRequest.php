@@ -7,7 +7,7 @@ use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Request\BuilderInterface;
 use Magento\Payment\Model\InfoInterface;
 
-abstract class AbstractAuthorizationRequest implements BuilderInterface
+abstract class AbstractRequest implements BuilderInterface
 {
     protected InfoInterface $payment;
     protected OrderAdapterInterface $order;

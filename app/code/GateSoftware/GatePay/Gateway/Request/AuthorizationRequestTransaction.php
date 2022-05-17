@@ -4,7 +4,7 @@ namespace GateSoftware\GatePay\Gateway\Request;
 
 use GateSoftware\GatePay\PayU\PayUConfiguration;
 
-class AuthorizationRequestTransaction extends AbstractAuthorizationRequest
+class AuthorizationRequestTransaction extends AbstractRequest
 {
     private PayUConfiguration $payuconf;
 

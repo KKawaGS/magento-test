@@ -4,7 +4,7 @@ namespace GateSoftware\GatePay\Gateway\Request;
 
 use Magento\Framework\Locale\Resolver;
 
-class AuthorizationRequestBuyer extends AbstractAuthorizationRequest
+class AuthorizationRequestBuyer extends AbstractRequest
 {
     private Resolver $shop;
 
