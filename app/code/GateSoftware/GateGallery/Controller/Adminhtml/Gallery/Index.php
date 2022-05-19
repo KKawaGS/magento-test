@@ -1,6 +1,6 @@
 <?php
 
-namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery\Index;
+namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 
 use Magento\Framework\Controller\ResultFactory;
 
