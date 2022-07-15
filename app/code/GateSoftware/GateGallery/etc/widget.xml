@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="GateSoftware_GateGallery" class="GateSoftware\GateGallery\Block\Widget\Gallery">
+        <label>Gallery Widget</label>
+        <description>Simple gallery</description>
+        <parameters>
+            <parameter name="gallery_id"
+                       xsi:type="select"
+                       visible="true"
+                       sort_order="1"
+                       source_model="GateSoftware\GateGallery\Model\Config\Source\Galleries">
+                <label>Gallery</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
