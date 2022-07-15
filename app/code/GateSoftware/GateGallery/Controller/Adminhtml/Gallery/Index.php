@@ -2,9 +2,10 @@
 
 namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 
+use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
 
-class Index extends \Magento\Backend\App\Action
+class Index extends Action
 {
 
     /**
@@ -12,6 +13,8 @@ class Index extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        $page = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        $page->getConfig()->getTitle()->set('Gate Gallery');
+        return $page;
     }
 }
