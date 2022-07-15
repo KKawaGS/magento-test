@@ -12,11 +12,11 @@ class Collection extends SearchResult
 {
     public function __construct(
         EntityFactory $entityFactory,
-        Logger $logger,
+        Logger        $logger,
         FetchStrategy $fetchStrategy,
-        EventManager $eventManager,
-        $mainTable = 'gategallery_gallery',
-        $resourceModel = 'GateSoftware\GateGallery\Model\ResourceModel\Gallery', $identifierName = null, $connectionName = null)
+        EventManager  $eventManager,
+                      $mainTable = 'gategallery_gallery',
+                      $resourceModel = \GateSoftware\GateGallery\Model\ResourceModel\Gallery::class, $identifierName = null, $connectionName = null)
     {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel, $identifierName, $connectionName);
     }
