@@ -1,0 +1,30 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="gategallery_gallery" comment="GateSoftware gallery">
+        <column name="id" xsi:type="int" identity="true" nullable="false" comment="gallery id" />
+        <column name="name" xsi:type="text" nullable="false" comment="gallery name" />
+        <column name="description" xsi:type="text" nullable="false" comment="gallery description" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+
+    <table name="gategallery_images" comment="GateSoftware gallery images table">
+        <column name="id" xsi:type="int" identity="true" nullable="false" comment="image id" />
+        <column name="name" xsi:type="text" nullable="false" comment="file name" />
+        <column name="type" xsi:type="text" nullable="false" comment="file type" />
+        <column name="size" xsi:type="int" nullable="true" comment="file size in bytes" />
+        <column name="path" xsi:type="text" nullable="false" comment="path to file" />
+        <column name="gallery_id" xsi:type="int" nullable="false" unsigned="false" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="GATEGALLERY_IMAGES_ID_GATEGALLERY_GALLERY_GALLERY_ID"
+                    table="gategallery_images"
+                    column="gallery_id"
+                    referenceTable="gategallery_gallery"
+                    referenceColumn="id"
+                    onDelete="CASCADE"/>
+
+    </table>
+</schema>
