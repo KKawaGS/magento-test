@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getViewFileUrl('mage/gallery/gallery.css') ?>">
+<div class="image-gallery"></div>
+<script>
+    require ([
+        'jquery',
+        'mage/gallery/gallery'
+    ], function ($, gallery) {
+        $(function () {
+            $('.image-gallery').each(function (index, element) {
+                gallery({
+                    options: {
+                        "nav": "dots",
+                        "loop": "true",
+                        "arrows": "true"
+                    },
+                    data: <?php echo $this->getGalleryImages() ?>,
+                    fullscreen: {
+                        "navdir": "horizontal"
+                    }
+                }, element);
+            });
+        });
+    });
+</script>
