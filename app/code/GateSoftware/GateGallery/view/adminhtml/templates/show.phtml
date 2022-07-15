@@ -1,0 +1,136 @@
+<?php
+/**
+ * @var \GateSoftware\GateGallery\Block\Gallery\Show $block
+ */
+
+$gallery = $block->getGalleryData();
+?>
+
+<div class="page-main-actions">
+    <div class="page-actions-placeholder"></div>
+    <div class="page-actions">
+        <div class="page-actions-inner" data-title="Gate Gallery">
+            <div class="page-actions-buttons">
+                <a class="button action- scalable secondary" href=<?php echo $block->getBackUrl() ?>>
+                    Back
+                </a>
+                <a class="button action- scalable primary" href=<?php echo $block->getEditUrl($gallery['id']) ?>>
+                    Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php if (count($gallery)): ?>
+    <div class="fieldset-wrapper">
+        <div class="fieldset-wrapper-title">
+            <strong class="title">Gallery</strong>
+        </div>
+        <div class="admin__fieldset-wrapper-content">
+            <fieldset class="admin__fieldset">
+                <div class="admin__field">
+                    <div class="admin__field-label">
+                        <label>
+                            <span>Name</span>
+                        </label>
+                    </div>
+                    <div class="admin__field-control">
+                        <span class="admin__control-text"
+                              style="line-height: 3.2rem; border: 0"><?php echo $gallery['name'] ?></span>
+                    </div>
+                </div>
+                <div class="admin__field">
+                    <div class="admin__field-label">
+                        <label>
+                            <span>Description</span>
+                        </label>
+                    </div>
+                    <div class="admin__field-control">
+                        <span class="admin__control-text"
+                              style="line-height: 3.2rem; border: 0"><?php echo $gallery['description'] ?></span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="fieldset-wrapper">
+        <div class="fieldset-wrapper-title">
+            <strong class="title">Images</strong>
+        </div>
+        <div class="admin__fieldset-wrapper-content">
+            <fieldset class="admin__fieldset">
+                <div class="admin__field">
+                    <label class="admin__field-label">
+                        <span></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <?php foreach ($block->getImagesByGalleryId() as $image): ?>
+                            <div class="file-uploader file-uploader-summary">
+                                <div class="file-uploader-preview">
+                                    <a class="preview-link preview-image" target="_blank"
+                                       href="<?php echo sprintf("%s%s", $block->getMediaBaseUrl(), $image['path']) ?>">
+                                        <img
+                                            src=<?php echo sprintf("%s%s", $block->getMediaBaseUrl(), $image['path']) ?>>
+                                    </a>
+                                </div>
+                                <div class="file-uploader-filename"><?php echo $image['name'] ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+<?php else: ?>
+    <div style="text-align: center">Gallery not found.</div>
+<?php endif; ?>
+
+
+<style>
+    a.button {
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: .025em;
+        display: inline-block;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        line-height: 1.36;
+        padding: 0.9rem 1em 0.9rem;
+        text-align: center;
+        vertical-align: baseline;
+    }
+
+    a.primary {
+        background-color: #eb5202;
+        border-color: #eb5202;
+        color: #ffffff;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+        border: 1px solid;
+        border-radius: 0;
+    }
+
+    a.primary:hover {
+        background-color: #ba4000;
+        border-color: #b84002;
+        box-shadow: 0 0 0 1px #007bdb;
+        color: #ffffff;
+    }
+
+    a.button.secondary {
+        color: #41362f;
+    }
+
+    a.button.secondary::before {
+        content: '\e626';
+        margin-right: .5em;
+        position: relative;
+        top: 1px;
+        -webkit-font-smoothing: antialiased;
+        font-family: 'Admin Icons';
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        speak: none;
+    }
+</style>
