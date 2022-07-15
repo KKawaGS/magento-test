@@ -1,4 +1,21 @@
 # Magento 2 Modules
+## Gate gallery
+Module displays images from gallery in static block using magento jquery gallery widget. User can create his own gallery, view, edit and delete existing ones.
+
+__Displaying gallery__
+![Display gallery in block](https://user-images.githubusercontent.com/91739397/179306956-38a6e28c-7417-414c-ac54-39edd250891c.png)
+
+__New gallery - ui component form__
+![New gallery form](https://user-images.githubusercontent.com/91739397/179307205-ebe1cb0d-f2cb-4f77-9ee6-ac62d05af0ff.png)
+
+__List of existing galleries - ui component listing__
+![List of galleries](https://user-images.githubusercontent.com/91739397/179307475-64911741-fea1-4bf4-98f2-46e7e74ccd7d.png)
+
+__Gallery preview__
+![Existing gallery](https://user-images.githubusercontent.com/91739397/179307635-1d4c2858-2f3a-4489-99de-9d38486d90b7.png)
+
+__Edit form -ui component form__
+![Edit form](https://user-images.githubusercontent.com/91739397/179307761-5ca11a26-935e-40f8-a71b-202f5f32daa8.png)
 
 ## GatePay
 Adds new payment method to checkout page
