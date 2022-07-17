@@ -33,7 +33,11 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
                     ],
                     'remove' => [
                         'href' => $this->url->getUrl('gallery\gallery') . 'delete' . '?' . 'id=' . $item['id'],
-                        'label' => __('Remove')
+                        'label' => __('Remove'),
+                        'confirm' => [
+                            'title' => __('Delete'),
+                            'message' => __('Are you sure you want to delete gallery?')
+                        ]
                     ]
                 ];
             }
