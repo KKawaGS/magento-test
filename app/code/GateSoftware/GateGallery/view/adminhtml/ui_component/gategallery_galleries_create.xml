@@ -27,7 +27,7 @@
     <dataSource name="images_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="name" xsi:type="string">gategallery_galleries_create_data_source</argument>
-            <argument name="class" xsi:type="string">GateSoftware\GateGallery\Ui\Component\Form\DataProvider</argument>
+            <argument name="class" xsi:type="string">GateSoftware\GateGallery\Ui\DataProvider</argument>
             <argument name="primaryFieldName" xsi:type="string">id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
@@ -80,11 +80,6 @@
             <label translate="true">Images</label>
         </settings>
         <field name="image" formElement="imageUploader">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string"></item>
-                </item>
-            </argument>
             <settings>
                 <label translate="true">Images</label>
                 <componentType>imageUploader</componentType>
