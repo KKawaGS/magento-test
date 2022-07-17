@@ -55,7 +55,7 @@ class Update extends Action
         $params = $this->getRequest()->getParams();
         $idValue = $this->getRequest()->getParam('id');
         $editImages = $this->getRequest()->getParam('image') ?? [];
-        $gallery = $this->gallery->load($idValue);
+        $this->galleryResource->load($this->gallery, $idValue);
         $images = $this->imageCollection->addFieldToSelect('*')
             ->addFieldToFilter('gallery_id', ['in' => $idValue])
             ->getItems();
@@ -69,11 +69,11 @@ class Update extends Action
                 throw new LocalizedException(__('Required parameter missing'));
             }
 
-            $gallery->setData('name', $params['name']);
-            $gallery->setData('description', $params['description']);
+            $this->gallery->setData('name', $params['name']);
+            $this->gallery->setData('description', $params['description']);
 
-            if ($gallery->hasDataChanges()) {
-                $this->galleryResource->save($gallery);
+            if ($this->gallery->hasDataChanges()) {
+                $this->galleryResource->save($this->gallery);
             }
 
             //find diff between db images and after edit array
@@ -93,9 +93,10 @@ class Update extends Action
                 }
             }
 
+            //resulting array consist only of new images
             foreach ($editImages as $imageData) {
                 $imgInfo = $this->saveImageFile($imageData);
-                $this->saveImageToDb($imageData, $gallery->getId());
+                $this->saveImageToDb($imageData, $this->gallery->getId());
             }
 
         } catch (LocalizedException $e) {
@@ -108,6 +109,7 @@ class Update extends Action
             return $this->_redirect('*/*/edit/id/' . $idValue);
         }
 
+        $this->messageManager->addSuccessMessage(__('Gallery successfully updated'));
         return $this->_redirect('*/*/index');
     }
 
