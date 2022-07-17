@@ -136,7 +136,7 @@ class Update extends Action
             'type' => $imageData['type'],
             'size' => $imageData['size'],
             'previewType' => $imageData['previewType'],
-            'path' => $this->mediaDirectory->getRelativePath('imageUploader/images') . '/' . $imageData['name']//$info['file']
+            'path' => $this->mediaDirectory->getRelativePath('imageUploader/images') . $imageData['file']//$info['file']
         ]);
 
         $image->setGalleryId($galleryId);
