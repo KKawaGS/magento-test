@@ -2,61 +2,31 @@
 
 namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 
-use GateSoftware\GateGallery\Model\Gallery;
-use GateSoftware\GateGallery\Model\GalleryFactory;
-use GateSoftware\GateGallery\Model\ImageFactory;
-use GateSoftware\GateGallery\Model\ImageFile;
-use GateSoftware\GateGallery\Model\ResourceModel\Gallery as GalleryResource;
-use GateSoftware\GateGallery\Model\ResourceModel\Image as ImageResource;
-use GateSoftware\GateGallery\Model\ResourceModel\Image\Collection as ImageCollection;
-use GateSoftware\GateGallery\Model\ResourceModel\Image\CollectionFactory as ImageCollectionFactory;
+use GateSoftware\GateGallery\Model\Repository\Gallery as GalleryRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Filesystem;
-use Magento\MediaStorage\Model\File\UploaderFactory;
 
 
 class Update extends Action
 {
-
-    private Gallery $gallery;
-    private GalleryResource $galleryResource;
-    private ImageCollection $imageCollection;
-    private ImageFactory $imageFactory;
-    private ImageResource $imageResource;
-    private ImageFile $imageFile;
+    private GalleryRepository $galleryRepository;
 
     public function __construct(
-        Context                $context,
-        ImageCollectionFactory $imageCollectionFactory,
-        ImageResource          $imageResource,
-        ImageFactory           $imageFactory,
-        GalleryFactory         $galleryFactory,
-        GalleryResource        $galleryResource,
-        UploaderFactory        $uploaderFactory,
-        Filesystem             $filesystem,
-        ImageFile              $imageFile
+        Context           $context,
+        GalleryRepository $galleryRepository
     )
     {
         parent::__construct($context);
-        $this->gallery = $galleryFactory->create();
-        $this->imageCollection = $imageCollectionFactory->create();
-        $this->imageResource = $imageResource;
-        $this->imageFactory = $imageFactory;
-        $this->galleryResource = $galleryResource;
-        $this->imageFile = $imageFile;
+        $this->galleryRepository = $galleryRepository;
     }
 
     public function execute()
     {
         $params = $this->getRequest()->getParams();
-        $idValue = $this->getRequest()->getParam('id');
+        $galleryId = $this->getRequest()->getParam('id');
         $editImages = $this->getRequest()->getParam('image') ?? [];
-        $this->galleryResource->load($this->gallery, $idValue);
-        $images = $this->imageCollection->addFieldToSelect('*')
-            ->addFieldToFilter('gallery_id', ['in' => $idValue])
-            ->getItems();
+        $images = $this->galleryRepository->getImages($galleryId);
 
         try {
             if ($this->getRequest()->getMethod() !== 'POST' || !$this->_formKeyValidator->validate($this->getRequest())) {
@@ -67,12 +37,11 @@ class Update extends Action
                 throw new LocalizedException(__('Required parameter missing'));
             }
 
-            $this->gallery->setData('name', $params['name']);
-            $this->gallery->setData('description', $params['description']);
-
-            if ($this->gallery->hasDataChanges()) {
-                $this->galleryResource->save($this->gallery);
-            }
+            $this->galleryRepository->saveGallery([
+                'name' => $params['name'],
+                'description' => $params['description'],
+                'id' => $galleryId
+            ]);
 
             //find diff between db images and after edit array
             foreach ($images as $image) {
@@ -85,45 +54,28 @@ class Update extends Action
                         break;
                     }
                 }
-
                 //id not found in edit array so it will be deleted
                 if (!$flag) {
-                    $this->imageResource->delete($image);
+                    $this->galleryRepository->deleteImageById($image->getId());
                 }
             }
 
             //resulting array consist only of new images
             foreach ($editImages as $imageData) {
-                $image = $this->imageFile->save($imageData);
-                $this->saveImageToDb($image, $this->gallery->getId());
+                $this->galleryRepository->saveImage($imageData, $galleryId);
             }
 
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
-            return $this->_redirect('*/*/edit/id/' . $idValue);
+            return $this->_redirect('*/*/edit/id/' . $galleryId);
         } catch (\Exception $e) {
             error_log($e->getMessage());
             error_log($e->getTraceAsString());
             $this->messageManager->addErrorMessage(__('An error occured. Try again.'));
-            return $this->_redirect('*/*/edit/id/' . $idValue);
+            return $this->_redirect('*/*/edit/id/' . $galleryId);
         }
 
         $this->messageManager->addSuccessMessage(__('Gallery successfully updated'));
         return $this->_redirect('*/*/index');
-    }
-
-    private function saveImageToDb(array $imageData, $galleryId)
-    {
-        $image = $this->imageFactory->create();
-        $image->setData([
-            'name' => $imageData['name'],
-            'type' => $imageData['type'],
-            'size' => $imageData['size'],
-            'previewType' => $imageData['previewType'],
-            'path' => $imageData['path']
-        ]);
-
-        $image->setGalleryId($galleryId);
-        $this->imageResource->save($image);
     }
 }

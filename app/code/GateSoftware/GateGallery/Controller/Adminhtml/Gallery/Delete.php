@@ -2,8 +2,7 @@
 
 namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 
-use GateSoftware\GateGallery\Model\GalleryFactory;
-use GateSoftware\GateGallery\Model\ResourceModel\Gallery;
+use GateSoftware\GateGallery\Model\Repository\Gallery as GalleryRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
@@ -11,34 +10,24 @@ use Magento\Framework\Exception\LocalizedException;
 
 class Delete extends Action
 {
-
-    private Gallery $galleryResource;
-    private GalleryFactory $galleryFactory;
+    private GalleryRepository $galleryRepository;
 
     public function __construct(
-        Context        $context,
-        Gallery        $galleryResource,
-        GalleryFactory $galleryFactory
+        Context           $context,
+        GalleryRepository $galleryRepository
     )
     {
         parent::__construct($context);
-        $this->galleryFactory = $galleryFactory;
-        $this->galleryResource = $galleryResource;
+        $this->galleryRepository = $galleryRepository;
     }
 
     public function execute()
     {
         try {
             $galleryId = $this->getRequest()->getParam('id');
-            $gallery = $this->galleryFactory->create();
-            $this->galleryResource->load($gallery, $galleryId);
-
-            if (!$gallery->hasData()) {
-                throw new LocalizedException(__('Gallery doesn\'t exist'));
-            }
-
+            $this->galleryRepository->deleteGalleryById($galleryId);
             $this->messageManager->addSuccessMessage(__('Gallery successfully deleted'));
-            $this->galleryResource->delete($gallery);
+
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {

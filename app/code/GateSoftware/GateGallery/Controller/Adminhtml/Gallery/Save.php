@@ -2,42 +2,23 @@
 
 namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 
-use GateSoftware\GateGallery\Model\GalleryFactory;
-use GateSoftware\GateGallery\Model\ImageFactory;
-use GateSoftware\GateGallery\Model\ImageFile;
-use GateSoftware\GateGallery\Model\ResourceModel\Gallery as GalleryResource;
-use GateSoftware\GateGallery\Model\ResourceModel\Image as ImageResource;
+use GateSoftware\GateGallery\Model\Repository\Gallery as GalleryRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Filesystem;
 use Magento\Framework\Validation\ValidationException;
 
 class Save extends Action
 {
-    private ImageFactory $imageFactory;
-    private GalleryFactory $galleryFactory;
-    private ImageResource $imageResource;
-    private GalleryResource $galleryResource;
-    private ImageFile $imageFile;
+    private GalleryRepository $galleryRepository;
 
     public function __construct(
-        Context         $context,
-        Filesystem      $filesystem,
-        ImageFactory    $imageFactory,
-        GalleryFactory  $galleryFactory,
-        GalleryResource $galleryResource,
-        ImageResource   $imageResource,
-        ImageFile       $imageFile
+        Context           $context,
+        GalleryRepository $galleryRepository
     )
     {
         parent::__construct($context);
-
-        $this->imageFactory = $imageFactory;
-        $this->galleryFactory = $galleryFactory;
-        $this->imageResource = $imageResource;
-        $this->galleryResource = $galleryResource;
-        $this->imageFile = $imageFile;
+        $this->galleryRepository = $galleryRepository;
     }
 
     /**
@@ -52,19 +33,14 @@ class Save extends Action
                 throw new LocalizedException(__('Invalid Request'));
             }
 
-            $gallery = $this->galleryFactory->create();
-            $gallery->setData(['name' => $params['name'], 'description' => $params['description']]);
-            $this->galleryResource->save($gallery);
+            $gallery = $this->galleryRepository->saveGallery($params);
 
             try {
                 foreach ($params['image'] as $imageData) {
-                    $image = $this->imageFile->save($imageData);
-                    $this->saveImageToDb($image, $gallery->getId());
+                    $this->galleryRepository->saveImage($imageData, $gallery->getId());
                 }
             } catch (ValidationException $e) {
                 throw new LocalizedException(__('Image extension is not supported.'));
-            } catch (\Exception $e) {
-                throw new LocalizedException(__('Image is required'));
             }
 
             $this->messageManager->addSuccessMessage(__('Image uploaded successfully'));
@@ -81,18 +57,4 @@ class Save extends Action
         }
     }
 
-    private function saveImageToDb(array $imageData, $galleryId)
-    {
-        $image = $this->imageFactory->create();
-        $image->setData([
-            'name' => $imageData['name'],
-            'type' => $imageData['type'],
-            'size' => $imageData['size'],
-            'previewType' => $imageData['previewType'],
-            'path' => $imageData['path']
-        ]);
-
-        $image->setGalleryId($galleryId);
-        $this->imageResource->save($image);
-    }
 }
