@@ -2,34 +2,20 @@
 
 namespace GateSoftware\GateGallery\Controller\Adminhtml\Image;
 
+use GateSoftware\GateGallery\Model\Repository\Gallery as GalleryRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\UrlInterface;
-use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\Directory\WriteInterface;
-use Magento\MediaStorage\Model\File\UploaderFactory;
-use Magento\Store\Model\StoreManagerInterface;
 
 class TempUpload extends Action
 {
-    protected UploaderFactory $uploaderFactory;
-    protected WriteInterface $mediaDirectory;
-    protected StoreManagerInterface $storeManager;
+    private GalleryRepository $galleryRepository;
 
-    public function __construct(
-        Context               $context,
-        UploaderFactory       $uploaderFactory,
-        Filesystem            $filesystem,
-        StoreManagerInterface $storeManager
-    )
+    public function __construct(Context $context, GalleryRepository $galleryRepository)
     {
         parent::__construct($context);
-        $this->uploaderFactory = $uploaderFactory;
-        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
-        $this->storeManager = $storeManager;
+        $this->galleryRepository = $galleryRepository;
     }
 
     public function execute()
@@ -37,16 +23,7 @@ class TempUpload extends Action
         $jsonResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);
 
         try {
-            $fileUploader = $this->uploaderFactory->create(['fileId' => 'image']);
-            $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
-            $fileUploader->setAllowRenameFiles(true);
-            $fileUploader->setAllowCreateFolders(true);
-            $fileUploader->setFilesDispersion(false);
-            $fileUploader->validateFile();
-            $result = $fileUploader->save($this->mediaDirectory->getAbsolutePath('tmp/imageUploader/images'));
-            $result['url'] = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA)
-                . 'tmp/imageUploader/images/' . ltrim(str_replace('\\', '/', $result['file']), '/');
-
+            $result = $this->galleryRepository->saveTempImage('image');
             return $jsonResult->setData($result);
         } catch (LocalizedException $e) {
             return $jsonResult->setData(['errorcode' => 0, 'error' => $e->getMessage()]);

@@ -103,6 +103,11 @@ class Gallery
         $this->saveImageToDb($image, $galleryId);
     }
 
+    public function saveTempImage(string $fieldName): array
+    {
+        return $this->imageFile->saveTempFile($fieldName);
+    }
+
     /**
      * @throws Exception
      */
