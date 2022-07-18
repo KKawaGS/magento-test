@@ -5,16 +5,15 @@ namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 use GateSoftware\GateGallery\Model\Gallery;
 use GateSoftware\GateGallery\Model\GalleryFactory;
 use GateSoftware\GateGallery\Model\ImageFactory;
+use GateSoftware\GateGallery\Model\ImageFile;
 use GateSoftware\GateGallery\Model\ResourceModel\Gallery as GalleryResource;
 use GateSoftware\GateGallery\Model\ResourceModel\Image as ImageResource;
 use GateSoftware\GateGallery\Model\ResourceModel\Image\Collection as ImageCollection;
 use GateSoftware\GateGallery\Model\ResourceModel\Image\CollectionFactory as ImageCollectionFactory;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\Directory\WriteInterface;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 
 
@@ -26,8 +25,7 @@ class Update extends Action
     private ImageCollection $imageCollection;
     private ImageFactory $imageFactory;
     private ImageResource $imageResource;
-    private UploaderFactory $uploaderFactory;
-    private WriteInterface $mediaDirectory;
+    private ImageFile $imageFile;
 
     public function __construct(
         Context                $context,
@@ -37,7 +35,8 @@ class Update extends Action
         GalleryFactory         $galleryFactory,
         GalleryResource        $galleryResource,
         UploaderFactory        $uploaderFactory,
-        Filesystem             $filesystem
+        Filesystem             $filesystem,
+        ImageFile              $imageFile
     )
     {
         parent::__construct($context);
@@ -46,8 +45,7 @@ class Update extends Action
         $this->imageResource = $imageResource;
         $this->imageFactory = $imageFactory;
         $this->galleryResource = $galleryResource;
-        $this->uploaderFactory = $uploaderFactory;
-        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        $this->imageFile = $imageFile;
     }
 
     public function execute()
@@ -87,6 +85,7 @@ class Update extends Action
                         break;
                     }
                 }
+
                 //id not found in edit array so it will be deleted
                 if (!$flag) {
                     $this->imageResource->delete($image);
@@ -95,8 +94,8 @@ class Update extends Action
 
             //resulting array consist only of new images
             foreach ($editImages as $imageData) {
-                $imgInfo = $this->saveImageFile($imageData);
-                $this->saveImageToDb($imageData, $this->gallery->getId());
+                $image = $this->imageFile->save($imageData);
+                $this->saveImageToDb($image, $this->gallery->getId());
             }
 
         } catch (LocalizedException $e) {
@@ -113,21 +112,6 @@ class Update extends Action
         return $this->_redirect('*/*/index');
     }
 
-    private function saveImageFile(array $imageData): array
-    {
-        if (!file_exists($imageData['tmp_name'])) {
-            $imageData['tmp_name'] = $imageData['path'] . '/' . $imageData['file'];
-        }
-
-        $fileUploader = $this->uploaderFactory->create(['fileId' => $imageData]);
-        $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
-        $fileUploader->setAllowRenameFiles(true);
-        $fileUploader->setAllowCreateFolders(true);
-        $fileUploader->validateFile();
-
-        return $fileUploader->save($this->mediaDirectory->getAbsolutePath('imageUploader/images'));
-    }
-
     private function saveImageToDb(array $imageData, $galleryId)
     {
         $image = $this->imageFactory->create();
@@ -136,7 +120,7 @@ class Update extends Action
             'type' => $imageData['type'],
             'size' => $imageData['size'],
             'previewType' => $imageData['previewType'],
-            'path' => $this->mediaDirectory->getRelativePath('imageUploader/images') . $imageData['file']//$info['file']
+            'path' => $imageData['path']
         ]);
 
         $image->setGalleryId($galleryId);

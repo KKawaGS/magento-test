@@ -4,44 +4,40 @@ namespace GateSoftware\GateGallery\Controller\Adminhtml\Gallery;
 
 use GateSoftware\GateGallery\Model\GalleryFactory;
 use GateSoftware\GateGallery\Model\ImageFactory;
+use GateSoftware\GateGallery\Model\ImageFile;
 use GateSoftware\GateGallery\Model\ResourceModel\Gallery as GalleryResource;
 use GateSoftware\GateGallery\Model\ResourceModel\Image as ImageResource;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\Directory\WriteInterface;
 use Magento\Framework\Validation\ValidationException;
-use Magento\MediaStorage\Model\File\UploaderFactory;
 
 class Save extends Action
 {
-    private UploaderFactory $uploaderFactory;
     private ImageFactory $imageFactory;
-    private WriteInterface $mediaDirectory;
     private GalleryFactory $galleryFactory;
     private ImageResource $imageResource;
     private GalleryResource $galleryResource;
-
+    private ImageFile $imageFile;
 
     public function __construct(
         Context         $context,
-        UploaderFactory $uploaderFactory,
         Filesystem      $filesystem,
         ImageFactory    $imageFactory,
         GalleryFactory  $galleryFactory,
         GalleryResource $galleryResource,
-        ImageResource   $imageResource
+        ImageResource   $imageResource,
+        ImageFile       $imageFile
     )
     {
         parent::__construct($context);
-        $this->uploaderFactory = $uploaderFactory;
+
         $this->imageFactory = $imageFactory;
         $this->galleryFactory = $galleryFactory;
-        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->imageResource = $imageResource;
         $this->galleryResource = $galleryResource;
+        $this->imageFile = $imageFile;
     }
 
     /**
@@ -62,8 +58,8 @@ class Save extends Action
 
             try {
                 foreach ($params['image'] as $imageData) {
-                    $this->saveImageFile($imageData);
-                    $this->saveImageToDb($imageData, $gallery->getId());
+                    $image = $this->imageFile->save($imageData);
+                    $this->saveImageToDb($image, $gallery->getId());
                 }
             } catch (ValidationException $e) {
                 throw new LocalizedException(__('Image extension is not supported.'));
@@ -85,21 +81,6 @@ class Save extends Action
         }
     }
 
-    private function saveImageFile(array $imageData): array
-    {
-        if (!file_exists($imageData['tmp_name'])) {
-            $imageData['tmp_name'] = $imageData['path'] . '/' . $imageData['file'];
-        }
-
-        $fileUploader = $this->uploaderFactory->create(['fileId' => $imageData]);
-        $fileUploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
-        $fileUploader->setAllowRenameFiles(true);
-        $fileUploader->setAllowCreateFolders(true);
-        $fileUploader->validateFile();
-
-        return $fileUploader->save($this->mediaDirectory->getAbsolutePath('imageUploader/images'));
-    }
-
     private function saveImageToDb(array $imageData, $galleryId)
     {
         $image = $this->imageFactory->create();
@@ -108,7 +89,7 @@ class Save extends Action
             'type' => $imageData['type'],
             'size' => $imageData['size'],
             'previewType' => $imageData['previewType'],
-            'path' => $this->mediaDirectory->getRelativePath('imageUploader/images') . $imageData['file']//$info['file']
+            'path' => $imageData['path']
         ]);
 
         $image->setGalleryId($galleryId);
