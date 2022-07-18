@@ -27,6 +27,10 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')] = [
+                    'show' => [
+                        'href' => $this->url->getUrl('gallery\gallery') . 'show' . '?' . 'id=' . $item['id'],
+                        'label' => __('View')
+                    ],
                     'edit' => [
                         'href' => $this->url->getUrl('gallery\gallery') . 'edit' . '?' . 'id=' . $item['id'],
                         'label' => __('Edit')
