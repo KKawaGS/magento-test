@@ -86,7 +86,7 @@
                     <item name="dataType" xsi:type="string">string</item>
                     <item name="formElement" xsi:type="string">imageUploader</item>
                     <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
-                    <item name="previewTmpl" xsi:type="string">ui/form/element/uploader/preview</item>
+                    <item name="previewTmpl" xsi:type="string">GateSoftware_GateGallery/form/element/uploader/preview</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="required" xsi:type="boolean">true</item>
                     <item name="previewType" xsi:type="string">image</item>

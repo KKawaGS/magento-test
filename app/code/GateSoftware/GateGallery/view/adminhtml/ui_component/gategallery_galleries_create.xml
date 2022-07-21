@@ -91,6 +91,7 @@
                 <imageUploader>
                     <settings>
                         <isMultipleFiles>true</isMultipleFiles>
+                        <previewTmpl>GateSoftware_GateGallery/form/element/uploader/preview</previewTmpl>
                         <allowedExtensions>jpg jpeg png</allowedExtensions>
                         <maxFileSize>2097000</maxFileSize>
                         <uploaderConfig>
