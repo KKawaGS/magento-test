@@ -4,7 +4,12 @@ define(function () {
     var mixin = {
         defaults: {
             isMultipleFiles: true
+        },
+
+        onClickCheck: function ($file) {
+            $file.visibility = $file.visibility === 'undefined' ? true : !$file.visibility;
         }
+
     };
 
     return function (target) {
