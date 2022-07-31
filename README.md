@@ -2,6 +2,11 @@
 ## Gate gallery
 Module displays images from gallery in static block using magento jquery gallery widget. User can create his own gallery, view, edit and delete existing ones.
 
+__Visibility Toggle__
+
+User can toggle visibility of images in the gallery widget without deleting them from gallery.
+![image](https://user-images.githubusercontent.com/91739397/182046739-21339f23-0e31-41f3-81cd-c955549e4f77.png)
+
 __Displaying gallery__
 ![Display gallery in block](https://user-images.githubusercontent.com/91739397/179306956-38a6e28c-7417-414c-ac54-39edd250891c.png)
 
