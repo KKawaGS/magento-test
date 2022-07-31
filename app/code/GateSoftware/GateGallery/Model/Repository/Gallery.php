@@ -4,6 +4,7 @@ namespace GateSoftware\GateGallery\Model\Repository;
 
 use Exception;
 use GateSoftware\GateGallery\Model\GalleryFactory;
+use GateSoftware\GateGallery\Model\Image;
 use GateSoftware\GateGallery\Model\ImageFactory;
 use GateSoftware\GateGallery\Model\ImageFile;
 use GateSoftware\GateGallery\Model\ResourceModel\Gallery as GalleryResource;
@@ -12,6 +13,7 @@ use GateSoftware\GateGallery\Model\ResourceModel\Image\Collection;
 use GateSoftware\GateGallery\Model\ResourceModel\Image\CollectionFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\FileSystemException;
+use function Aws\boolean_value;
 
 class Gallery
 {
@@ -79,6 +81,7 @@ class Gallery
             'size' => $imageData['size'],
             'previewType' => $imageData['previewType'],
             'path' => $imageData['path'],
+            'visibility' => $imageData,
             'gallery_id' => $galleryId
         ]);
 
@@ -148,6 +151,21 @@ class Gallery
         $this->galleryResource->delete($gallery);
 
         return $gallery;
+    }
+
+    /**
+     * @throws AlreadyExistsException
+     */
+    public function saveImageIfChanged(array $editImage)
+    {
+        $image = $this->imageCollection->getItemById($editImage['id']);
+        if($image->getVisibility() !== $editImage['visibility']) {
+            $image->setVisibility(boolean_value($editImage['visibility']));
+        }
+
+        if($image->hasDataChanges()) {
+            $this->imageResource->save($image);
+        }
     }
 
     public function checkIfGalleryExist($galleryId): bool
