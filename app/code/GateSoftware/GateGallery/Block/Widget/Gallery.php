@@ -33,6 +33,7 @@ class Gallery extends Template implements BlockInterface
     {
         $images = $this->imageFactory->create();
         $items = $images->addFieldToFilter('gallery_id', ['in' => [$this->getGalleryId()]])
+            ->addFieldToFilter('visibility', ['in' => 1])
             ->load()
             ->getData();
 
