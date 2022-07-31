@@ -48,7 +48,7 @@ class Update extends Action
                 $flag = false;
                 foreach ($editImages as $key => $editImage) {
                     if ($image->getId() == $editImage['id']) {
-                        //id is in the array - nothing has changed
+                        $this->galleryRepository->saveImageIfChanged($editImage);
                         unset($editImages[$key]);
                         $flag = true;
                         break;
@@ -60,7 +60,7 @@ class Update extends Action
                 }
             }
 
-            //resulting array consist only of new images
+            //resulting array consist of new images
             foreach ($editImages as $imageData) {
                 $this->galleryRepository->saveImage($imageData, $galleryId);
             }
