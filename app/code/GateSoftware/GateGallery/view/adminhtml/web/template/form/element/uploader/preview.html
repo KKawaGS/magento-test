@@ -6,9 +6,8 @@
 -->
 <div class="file-uploader-summary">
     <div class="file-uploader-preview">
-        <label class="check-container" attr="title: $t('Toggle visibility of image')"
-               click="$parent.onClickCheck($file)">
-            <input type="checkbox" data-bind="checked: $file.visibility">
+        <label class="check-container" attr="title: $t('Toggle visibility of image')">
+                <input type="checkbox" data-bind="checked: $parent.isVisible($file)" click="$parent.onClickCheck.bind($parent)">
             <span class="checkmark"></span>
         </label>
         <a class="preview-link"
